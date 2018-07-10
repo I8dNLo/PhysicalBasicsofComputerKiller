@@ -8,20 +8,30 @@ from time import sleep
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
 
-
 import os
 from sys import exit
 from time import sleep
 def loginf(driver, login, password, depth=0):
     if depth<5:
         try:
-            element = driver.find_element_by_class_name("input-text")
+            Login_element = driver.find_element_by_name("login")
+            Password_element = driver.find_element_by_name("password")
+            Remember_element = driver.find_element_by_name("remember")
+            Submit_element = driver.find_element_by_class_name("button")
+            if Login_element is not None and Password_element is not None:
+                print("Login and Password boxes located")
             print("Trying to set login: {}".format(login))
-            element.click()
-            element.send_keys(login)
-        except:
+            sleep(0.5)
+            Login_element.send_keys(login)
+            Password_element.send_keys(password)
+            Remember_element.click()
+            Submit_element.click()
+
+
+
+        except NoSuchElementException:
             sleep(1)
-            loginf(driver, login, depth+1)
+            loginf(driver, login, password, depth+1)
     else:
         exit()
 
@@ -39,7 +49,7 @@ options = webdriver.ChromeOptions()
 print(path)
 #options.add_argument('headless')
 try:
-    driver = webdriver.Chrome('../chromedriver/chromedriver.exe', chrome_options=options)
+    driver = webdriver.Chrome('../chromedriver/chromedriver2.exe', chrome_options=options)
 except:
     exit()
 for login in log_and_pass.keys():
