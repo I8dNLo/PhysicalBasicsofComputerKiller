@@ -17,23 +17,29 @@ def loginf(driver, login, password, depth=0):
             Login_element = driver.find_element_by_name("login")
             Password_element = driver.find_element_by_name("password")
             Remember_element = driver.find_element_by_name("remember")
-            Submit_element = driver.find_element_by_class_name("button")
+
             if Login_element is not None and Password_element is not None:
                 print("Login and Password boxes located")
             print("Trying to set login: {}".format(login))
             sleep(0.5)
             Login_element.send_keys(login)
             Password_element.send_keys(password)
-            Remember_element.click()
+            sleep(0.5)
+            #Remember_element.click()
+            Submit_element = driver.find_element_by_class_name("button")
             Submit_element.click()
-
-
-
+            return True
         except NoSuchElementException:
             sleep(1)
             loginf(driver, login, password, depth+1)
     else:
+        print("Oooops!")
         exit()
+
+def add_raiting(driver, page):
+    driver.get("http://compblog.ilc.edu.ru/profile/" + page)
+    Plus_element = driver.find_element_by_class_name("plus")
+    Plus_element.click()
 
 
 path= os.path.dirname(__file__)
@@ -56,24 +62,6 @@ for login in log_and_pass.keys():
     driver.get(site)
     sleep(1)
     loginf(driver, login, password= log_and_pass.get(login))
-
-    #element = driver.find_element_by_name("login")
-
-
-#for idx, doc in tqdm_notebook(enumerate(docs)):
-    #print('{}. Обработка {}'.format(idx, doc), end=':')
-    #options = webdriver.ChromeOptions()
-    #options.add_argument('headless')
-    #try:
-    #    driver = webdriver.Chrome('chromedriver/chromedriver.exe', chrome_options=options)
-    #except:
-    #    pass
-    #driver.get(site)
-    #element=driver.find_element_by_xpath('//*[@id="module-1-2-1"]/div/input')
-    #WebDriverWait(driver, 1)
-    #element.send_keys(doc)
-    #element.send_keys(Keys.RETURN)
-
-
-
-    #class ="input-text" name="login" tabindex="1" id="login-input" >
+    for page in  set(log_and_pass.keys()).difference(set(login)):
+        print(page)
+        add_raiting(driver, page.split("@")[0])
