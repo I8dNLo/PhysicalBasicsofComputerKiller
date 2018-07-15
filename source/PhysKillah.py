@@ -44,10 +44,14 @@ site = 'http://compblog.ilc.edu.ru/login/'
 
 with open("../accounts/Accounts.txt", "r") as file:
     log_and_pass = dict()
+    non_bot_set = set()
     for line in file:
-        login, password = line.split(" ")
+        login, password, is_bot = line.split(" ")
         log_and_pass.update({login:password})
+        if "False" in is_bot:
+            non_bot_set.update({login})
 
+print(non_bot_set)
 options = webdriver.ChromeOptions()
 print(path)
 options.add_argument('headless')
@@ -59,9 +63,8 @@ for login in log_and_pass.keys():
     driver.get(site)
     sleep(1)
     loginf(driver, login, password= log_and_pass.get(login))
-    for page in  set(log_and_pass.keys()).difference(set(login)):
+    for page in  non_bot_set.difference(set(login)):
         print("Liking {}".format(page))
         add_raiting(driver, page.split("@")[0])
         like_fresh_posts(driver)
-
 driver.close()
