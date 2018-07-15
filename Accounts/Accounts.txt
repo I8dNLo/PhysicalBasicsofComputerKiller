@@ -1,5 +1,5 @@
 daniil d42c323 True
-dimitriy_rudenko@mail.ru 1q2w3e4r False
+dimitriy_rudenko@mail.ru 1q2w3e4r True
 artem_p qweasd123 True
 komarova_xscdio qaswsxedc1 True
 multiksun tuturu5 True
