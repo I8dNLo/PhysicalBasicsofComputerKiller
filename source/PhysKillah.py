@@ -1,12 +1,6 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
 
-from time import sleep
 from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.common.action_chains import ActionChains
 
 import os
 from sys import exit
@@ -16,16 +10,10 @@ def loginf(driver, login, password, depth=0):
         try:
             Login_element = driver.find_element_by_name("login")
             Password_element = driver.find_element_by_name("password")
-            Remember_element = driver.find_element_by_name("remember")
 
-            if Login_element is not None and Password_element is not None:
-                print("Login and Password boxes located")
             print("Trying to set login: {}".format(login))
-            sleep(0.5)
             Login_element.send_keys(login)
             Password_element.send_keys(password)
-            sleep(0.5)
-            #Remember_element.click()
             Submit_element = driver.find_element_by_class_name("button")
             Submit_element.click()
             return True
@@ -47,7 +35,7 @@ def like_fresh_posts(driver):
     es = driver.find_elements_by_class_name("plus")
     es_len = len(es)
     for i in range(es_len):
-        if i<es_len:
+        if i<es_len-1:
             es = driver.find_elements_by_class_name("plus")
             es[i].click()
 
@@ -62,7 +50,7 @@ with open("../accounts/Accounts.txt", "r") as file:
 
 options = webdriver.ChromeOptions()
 print(path)
-#options.add_argument('headless')
+options.add_argument('headless')
 try:
     driver = webdriver.Chrome('../chromedriver/chromedriver2.exe', chrome_options=options)
 except:
@@ -72,6 +60,8 @@ for login in log_and_pass.keys():
     sleep(1)
     loginf(driver, login, password= log_and_pass.get(login))
     for page in  set(log_and_pass.keys()).difference(set(login)):
-        print(page)
+        print("Liking {}".format(page))
         add_raiting(driver, page.split("@")[0])
         like_fresh_posts(driver)
+
+driver.close()
