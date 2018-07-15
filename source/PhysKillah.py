@@ -41,6 +41,15 @@ def add_raiting(driver, page):
     Plus_element = driver.find_element_by_class_name("plus")
     Plus_element.click()
 
+def like_fresh_posts(driver):
+    e = driver.find_element_by_css_selector("#nav > ul > li:nth-child(2) > a")
+    e.click()
+    es = driver.find_elements_by_class_name("plus")
+    es_len = len(es)
+    for i in range(es_len):
+        if i<es_len:
+            es = driver.find_elements_by_class_name("plus")
+            es[i].click()
 
 path= os.path.dirname(__file__)
 site = 'http://compblog.ilc.edu.ru/login/'
@@ -65,3 +74,4 @@ for login in log_and_pass.keys():
     for page in  set(log_and_pass.keys()).difference(set(login)):
         print(page)
         add_raiting(driver, page.split("@")[0])
+        like_fresh_posts(driver)
