@@ -1,6 +1,6 @@
 ﻿# PhysicalBasicsofComputerKiller
 Скрипт на основе Selenium, который получает за вас автомат по предмету "Физические основы ЭВМ" на ВМК МГУ
-![font img](https://github.com/gr33n-made/PhysicalBasicsofComputerKiller/raw/master/.idea/image.png)
+![font img](https://github.com/gr33n-made/PhysicalBasicsofComputerKiller/blob/master/.idea/image.jpg)
 
 Зависимости
 #####
