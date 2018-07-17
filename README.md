@@ -6,7 +6,8 @@
 =====================
 
 Для работы с этим проектом нужны:
-1. Selenium (pip install selenium)
+1. Selenium 
+>pip install selenium
 
 Запуск
 =====================
