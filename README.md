@@ -1,5 +1,6 @@
 ﻿# PhysicalBasicsofComputerKiller
-Скрипт на основе Selenium, который получает за вас автомат по предмету "Физические основы ЭВМ" на ВМК МГУ
+Скрипт на основе Selenium, который получает за вас автомат по предмету "Физические основы ЭВМ" на ВМК МГУ.
+Скрипт автоматически логинится в аккаунтах пула и лайкает все целевые аккаунты из Accounts/account.txt и все их посты. 
 ![font img](https://github.com/gr33n-made/PhysicalBasicsofComputerKiller/blob/master/.idea/image.jpg)
 
 Зависимости
